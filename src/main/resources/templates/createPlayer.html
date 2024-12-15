@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Jogador</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Criar Jogador</h1>
+
+    <!-- Formulário para criar jogador -->
+    <form th:action="@{/players/create}" method="post" th:object="${player}" id="playerForm">
+        <div class="form-group">
+            <label for="name">Nome:</label>
+            <input type="text" id="name" th:field="*{name}" placeholder="Digite o nome" required>
+        </div>
+
+        <div class="form-group">
+            <label for="rating">Rating (1-10):</label>
+            <input type="number" id="rating" th:field="*{rating}" min="1" max="10" placeholder="Digite o rating" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="text" id="email" th:field="*{email}" placeholder="Digite o email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="isGoing">Está presente na lista?</label>
+            <input type="checkbox" id="isGoing" th:field="*{going}">
+        </div>
+
+        <button type="submit" class="submit-button">Salvar Jogador</button>
+    </form>
+
+    <!-- Mensagem de validação -->
+    <p id="message" th:if="${message}" th:text="${message}" class="message"></p>
+
+    <!-- Botão de Voltar -->
+    <div class="back-button">
+        <a th:href="@{/}" class="button-link">Voltar</a>
+    </div>
+</div>
+</body>
+</html>

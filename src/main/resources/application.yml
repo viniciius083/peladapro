@@ -1,0 +1,29 @@
+#    spring.web.resources.static-locations=classpath:/static/
+
+spring:
+    web:
+        resources:
+            static-locations: classpath:/static/
+    application:
+        name: peladapro
+    datasource:
+        url: ${SPRING_DATASOURCE_URL:jdbc:mysql://127.0.0.1:3306/peladapro?useSSL=false&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true}
+        username: root
+        password: password
+        driver-class-name: com.mysql.cj.jdbc.Driver
+    jpa:
+        database-platform: org.hibernate.dialect.MySQL8Dialect
+        hibernate:
+            ddl-auto: update
+        show-sql: false
+
+server:
+    port: 8080
+    servlet:
+        session:
+            timeout: 15m
+
+logging:
+    level:
+        com.peladapro: DEBUG
+

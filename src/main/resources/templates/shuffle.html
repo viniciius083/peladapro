@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sortear Times</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Sortear Times</h1>
+
+    <!-- Campo para definir a quantidade de times -->
+    <form th:action="@{/teams/sort}" method="post" id="teamForm">
+        <div class="form-group">
+            <label for="numTeams">Quantidade de Times:</label>
+            <input type="number" id="numTeams" name="numTeams" min="2" max="10" placeholder="Digite o número de times" required>
+        </div>
+
+        <!-- Botão para iniciar o sorteio -->
+        <button type="submit" class="submit-button">Sortear Times</button>
+    </form>
+
+    <!-- Lista de jogadores presentes -->
+    <div id="players-present" th:if="${players != null}">
+        <h2>Jogadores Presentes</h2>
+        <ul class="players-list">
+            <li th:each="player : ${players}" th:text="${player.name} + ' (' + ${player.rating} + ')'"></li>
+        </ul>
+    </div>
+
+    <!-- Botão de Voltar -->
+    <div class="back-button">
+        <a th:href="@{/}" class="button-link">Voltar</a>
+    </div>
+</div>
+</body>
+</html>

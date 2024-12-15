@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pelada das Antigas</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>PDA</h1>
+        <p>Pelada das Antigas</p>
+    </header>
+
+    <nav class="menu">
+        <a th:href="@{/ranking}" class="menu-link">Ranking</a>
+        <a th:href="@{/players}" class="menu-link">Criar Jogador</a>
+        <a th:href="@{/teams/sort}" class="menu-link">Sortear Times</a>
+        <a th:href="@{/players/update}" class="menu-link">Gerenciar Jogadores</a>
+        <a th:href="@{/users/create}" class="menu-link">Criar Usuário</a>
+        <a th:href="@{/vote}" class="menu-link">Votar</a>
+        <a th:href="@{/logout}" class="menu-link">Sair</a>
+
+    </nav>
+</div>
+</body>
+</html>

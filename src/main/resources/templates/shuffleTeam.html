@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sortear Times</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Sortear Times</h1>
+
+    <!-- Exibição dos Times -->
+    <div id="teams" th:if="${teams != null}">
+        <h2>Times Sorteados</h2>
+        <div class="team" th:each="team : ${teams}">
+            <h3 th:text="${team.name} + ' - Nota: ' + ${team.rating}"></h3>
+            <ul>
+                <li th:each="player : ${team.players}" th:text="${player.name} + ' ( ' + ${player.rating} + ')'"></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Exibição de Jogadores Reserva -->
+    <div id="reserve-players" th:if="${reservePlayers != null && #lists.size(reservePlayers) > 0}">
+        <h2>Jogadores Reserva</h2>
+        <ul>
+            <li th:each="reserve : ${reservePlayers}" th:text="${reserve.name} + ' ( ' + ${reserve.rating} + ')'"></li>
+        </ul>
+    </div>
+
+    <!-- Botão de Voltar -->
+    <div class="back-button">
+        <a th:href="@{/}" class="button-link">Voltar</a>
+    </div>
+</div>
+</body>
+</html>

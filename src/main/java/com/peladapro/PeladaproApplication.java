@@ -8,6 +8,8 @@ public class PeladaproApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PeladaproApplication.class, args);
+
 	}
+
 
 }

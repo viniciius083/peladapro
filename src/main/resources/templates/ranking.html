@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranking de Jogadores</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Ranking de Jogadores</h1>
+    <!-- Botão de Voltar -->
+    <!-- Tabela de jogadores -->
+    <table>
+        <thead>
+        <tr>
+            <th>Posição</th>
+            <th>Nome</th>
+            <th>Rating</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="player, iterStat: ${playersPage.content}">
+            <td th:text="${iterStat.index + (playersPage.number * playersPage.size) + 1}"></td>
+            <td th:text="${player.name}"></td>
+            <td th:text="${player.rating}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Controles de paginação -->
+    <div class="pagination">
+        <!-- Botão Anterior -->
+        <a th:href="@{/ranking(size=${playersPage.size}, page=${playersPage.number - 1})}"
+           class="button-link"
+        th:classappend="${!playersPage.hasPrevious()} ? 'disabled' : ''"
+        >
+            Anterior
+        </a>
+
+        <!-- Texto da Página -->
+        <span th:text="'Página ' + (${playersPage.number + 1}) + ' de ' + ${playersPage.totalPages}">
+    </span>
+
+        <!-- Botão Próxima -->
+        <a th:href="@{/ranking(size=${playersPage.size}, page=${playersPage.number + 1})}"
+
+           class="button-link"
+        th:classappend="${!playersPage.hasNext()} ? 'disabled' : ''" >
+
+            Próxima
+        </a>
+    </div>
+
+
+
+    <!-- Botão de Voltar -->
+    <div class="back-button">
+        <a th:href="@{/}" class="button-link">Voltar</a>
+    </div>
+
+</div>
+</body>
+</html>

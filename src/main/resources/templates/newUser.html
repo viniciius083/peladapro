@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Usuário</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Criar Usuário</h1>
+
+    <!-- Mensagem de erro ou sucesso -->
+    <div th:if="${message}" class="message" th:classappend="${success ? 'success' : 'error'}" th:text="${message}"></div>
+
+    <!-- Formulário para Criar Usuário -->
+    <form th:action="@{/users/create}" method="post" th:object="${user}">
+        <!-- Nome de Usuário -->
+        <div class="form-group">
+            <label for="username">Nome de Usuário:</label>
+            <input type="text" id="username" th:field="*{username}" placeholder="Digite o nome de usuário" required>
+        </div>
+
+        <!-- Senha -->
+        <div class="form-group">
+            <label for="password">Senha:</label>
+            <input type="password" id="password" th:field="*{password}" placeholder="Digite a senha" required>
+        </div>
+
+        <!-- Função -->
+        <div class="form-group">
+            <label for="role">Função:</label>
+            <select id="role" th:field="*{role}" required>
+                <option value="USER">Usuário</option>
+                <option value="ADMIN">Administrador</option>
+            </select>
+        </div>
+
+        <!-- Botão de Enviar -->
+        <button type="submit" class="submit-button">Criar Usuário</button>
+    </form>
+
+    <!-- Botão de Voltar -->
+    <div class="back-button">
+        <a th:href="@{/}" class="button-link">Voltar</a>
+    </div>
+</div>
+</body>
+</html>
