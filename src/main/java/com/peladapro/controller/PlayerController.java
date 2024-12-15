@@ -1,10 +1,10 @@
 package com.peladapro.controller;
 
-import com.peladapro.wrappers.PlayerListWrapper;
 import com.peladapro.dto.player.PlayerDTO;
 import com.peladapro.dto.vote.VoteDTO;
 import com.peladapro.model.Player;
 import com.peladapro.service.PlayerService;
+import com.peladapro.wrappers.PlayerListWrapper;
 import com.peladapro.wrappers.VoteListWrapper;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
