@@ -7,7 +7,7 @@ spring:
     application:
         name: peladapro
     datasource:
-        url: ${SPRING_DATASOURCE_URL:jdbc:mysql://127.0.0.1:32768/peladapro?useSSL=false&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true}
+        url: ${SPRING_DATASOURCE_URL:jdbc:mysql://127.0.0.1:3306/peladapro?useSSL=false&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true}
         username: root
         password: password
         driver-class-name: com.mysql.cj.jdbc.Driver
