@@ -195,6 +195,24 @@ tr:nth-child(even) {
 .back-button {
     margin-top: 20px;
     text-align: center;
+
+
+/* Botão de Logout */
+.logout-button {
+    background-color: #dc3545; /* Vermelho para indicar ação de sair */
+    color: #ffffff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.logout-button:hover {
+    background-color: #c82333; /* Tom mais escuro ao passar o mouse */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 /* Media Queries */

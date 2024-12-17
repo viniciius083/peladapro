@@ -14,13 +14,15 @@
     </header>
 
     <nav class="menu">
-        <a th:href="@{/ranking}" class="menu-link">Ranking</a>
-        <a th:href="@{/players}" class="menu-link">Criar Jogador</a>
-        <a th:href="@{/teams/sort}" class="menu-link">Sortear Times</a>
-        <a th:href="@{/players/update}" class="menu-link">Gerenciar Jogadores</a>
-        <a th:href="@{/users/create}" class="menu-link">Criar Usuário</a>
-        <a th:href="@{/vote}" class="menu-link">Votar</a>
-        <a th:href="@{/logout}" class="menu-link">Sair</a>
+        <a th:href="@{/ranking}" class="menu-link">Ranking </a>
+        <a th:href="@{/players}" class="menu-link">Criar Jogador 🔒</a>
+        <a th:href="@{/teams/sort}" class="menu-link">Sortear Times 🔒</a>
+        <a th:href="@{/players/update}" class="menu-link">Gerenciar Jogadores 🔒</a>
+        <a th:href="@{/users/create}" class="menu-link">Criar Usuário 🔒</a>
+        <a th:href="@{/vote}" class="menu-link">Votar 🔒</a>
+        <form th:action="@{/logout}" method="post" style="display: inline;">
+            <button type="submit" class="submit-button logout-button">Sair</button>
+        </form>
 
     </nav>
 </div>
