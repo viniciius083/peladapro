@@ -2,7 +2,6 @@ package com.peladapro.model;
 
 import com.peladapro.dto.player.PlayerDTO;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +9,6 @@ import lombok.Setter;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,10 +29,6 @@ public class Player {
 
     private boolean isGoing;
 
-    @Column(nullable = false, unique = true)
-    @Email
-    private String email;
-
     @ElementCollection
     @CollectionTable(name = "ratings", joinColumns = @JoinColumn(name = "player_id"))
     @MapKeyColumn(name = "appraiser")
@@ -45,7 +39,6 @@ public class Player {
         this.name = playerDTO.getName();
         this.rating = playerDTO.getRating();
         this.isGoing = playerDTO.getGoing();
-        this.email = playerDTO.getEmail();
     }
 
     public void evaluate(String player, int rating) {

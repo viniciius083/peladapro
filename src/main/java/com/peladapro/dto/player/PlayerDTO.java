@@ -17,14 +17,11 @@ public class PlayerDTO{
 
     private Boolean going;
 
-    private String email;
-
     public PlayerDTO() {
         this.setId(null);
         this.setName(null);
         this.setRating(0);
         this.setGoing(false);
-        this.setEmail(null);
     }
 
     public PlayerDTO(Player player) {
@@ -32,7 +29,6 @@ public class PlayerDTO{
         this.setName(player.getName());
         this.setRating(player.getRating());
         this.setGoing(player.isGoing());
-        this.setEmail(player.getEmail());
 
     }
 }

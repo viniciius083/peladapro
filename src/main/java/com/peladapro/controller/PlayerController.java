@@ -82,7 +82,6 @@ public class PlayerController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/voting/submit")
     public String submitVotes(HttpServletRequest request, @ModelAttribute VoteListWrapper votingList) {
-        // Capturar o usuário autenticado
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         List<VoteDTO> votes = votingList.getVotes();
