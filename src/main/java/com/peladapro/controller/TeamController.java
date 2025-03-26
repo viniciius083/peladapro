@@ -24,7 +24,7 @@ public class TeamController {
     private final TeamService teamService;
     @GetMapping("/sort")
     public String showTeamSortPage(Model model) {
-        List<Player> players = playerService.getConfirmedPlayers(); // Lista de jogadores presentes
+        List<Player> players = playerService.getConfirmedPlayers();
         model.addAttribute("players", players);
         return "shuffle";
     }

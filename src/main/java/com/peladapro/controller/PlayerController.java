@@ -46,7 +46,7 @@ public class PlayerController {
         model.addAttribute("player", new Player());
         return "createPlayer";
     }
-//    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/players/create")
     public String createPlayer(PlayerDTO player, Model modelO) {
         modelO.addAttribute("player", player);

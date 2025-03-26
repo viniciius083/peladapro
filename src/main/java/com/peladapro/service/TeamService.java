@@ -99,11 +99,11 @@ public class TeamService {
         Collections.shuffle(players); // misturar para selecionar os reservas
         List<Player> reservePlayers = players.subList(maxPlayersInTeams, totalPlayers); // Jogadores extras
         List<Player> playersInTeams = players.subList(0, maxPlayersInTeams); // Jogadores alocados nos times
-
         // Cria uma distribuição inicial balanceada para jogadores em times
         List<Integer> initialGuess = createBalancedInitialGuess(playersInTeams.size(), numTeams);
-        List<Integer> optimizedGuess = generateOptimizedTeams(initialGuess, numTeams, players);
-        Map<Integer, List<Player>> teams = findTeams(optimizedGuess, numTeams, players);
+        Collections.shuffle(initialGuess);
+        List<Integer> optimizedGuess = generateOptimizedTeams(initialGuess, numTeams, playersInTeams);
+        Map<Integer, List<Player>> teams = findTeams(optimizedGuess, numTeams, playersInTeams);
 
         return new TeamShuffledDTO(teams, reservePlayers);
     }
@@ -119,6 +119,7 @@ public class TeamService {
         for (int i = 0; i < totalPlayers; i++) {
             guess.add(i % numTeams + 1);
         }
+        Collections.shuffle(guess);
         return guess;
     }
 

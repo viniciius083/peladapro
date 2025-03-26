@@ -76,9 +76,11 @@ public class PlayerService {
 
     public void submitVotes(String username, List<VoteDTO> votes) {
         for(VoteDTO vote : votes) {
-            Player player = getPlayerById(vote.getId());
-            player.evaluate(username, vote.getVote());
-            playerRepository.save(player);
+            if(vote.getVote() > 0){
+                Player player = getPlayerById(vote.getId());
+                player.evaluate(username, vote.getVote());
+                playerRepository.save(player);
+            }
         }
     }
 }

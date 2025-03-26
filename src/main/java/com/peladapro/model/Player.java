@@ -7,8 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,9 +32,7 @@ public class Player {
 
     @ElementCollection
     @CollectionTable(name = "ratings", joinColumns = @JoinColumn(name = "player_id"))
-    @MapKeyColumn(name = "appraiser")
-    @Column(name = "rating")
-    private Map<String, Integer> ratings = new HashMap<>();
+    private List<RatingEntry> ratings = new ArrayList<>();
 
     public Player(PlayerDTO playerDTO) {
         this.name = playerDTO.getName();
@@ -42,9 +41,15 @@ public class Player {
     }
 
     public void evaluate(String player, int rating) {
-            this.ratings.put(player, rating);
-            calculateAverageSkill();
+        boolean votedRecently = ratings.stream()
+                .filter(entry -> entry.getAppraiser().equals(player))
+                .anyMatch(entry -> entry.getRatedAt() != null
+                        && entry.getRatedAt().isAfter(LocalDate.now().minusDays(6)));
 
+        if (!votedRecently) {
+            this.ratings.add(new RatingEntry(player, rating, LocalDate.now()));
+            calculateAverageSkill();
+        }
     }
 
     /**
@@ -52,7 +57,9 @@ public class Player {
      */
     private void calculateAverageSkill() {
         if (!ratings.isEmpty()) {
-            double sum = ratings.values().stream().mapToInt(Integer::intValue).sum();
+            double sum = ratings.stream()
+                    .mapToInt(RatingEntry::getRating)
+                    .sum();
             this.rating = sum / ratings.size();
         }
     }
