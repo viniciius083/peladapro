@@ -25,4 +25,10 @@ public class RatingEntry {
     private String appraiser;
     private Integer rating;
     private LocalDate ratedAt;
+
+    public RatingEntry(String player, int rating, LocalDate now) {
+        this.appraiser = player;
+        this.rating = rating;
+        this.ratedAt = now;
+    }
 }
