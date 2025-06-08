@@ -18,13 +18,13 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/users/create")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public String showCreateUserForm(Model model) {
         model.addAttribute("user", new UserDTO());
         return "newUser";
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/users/create")
     public String createUser(@ModelAttribute UserDTO userDTO, Model model) {
         userService.createUser(userDTO);
