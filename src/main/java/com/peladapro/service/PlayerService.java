@@ -4,14 +4,14 @@ import com.peladapro.dto.player.PlayerDTO;
 import com.peladapro.dto.vote.VoteDTO;
 import com.peladapro.exception.ResourceNotFoundException;
 import com.peladapro.model.Player;
+import com.peladapro.model.RatingEntry;
 import com.peladapro.repository.PlayerRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PagedModel;
 import org.springframework.stereotype.Service;
 
-import java.awt.print.Pageable;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,39 +48,55 @@ public class PlayerService {
                 .orElseThrow(() -> new ResourceNotFoundException("Player not found with id: " + id));
     }
 
-    // Avaliar um jogador
-    public Player evaluatePlayer(Long evaluatorId, Long id, int score) {
-        Player player = getPlayerById(id);
-        Player playerEvaluator = getPlayerById(evaluatorId);
-        player.evaluate(playerEvaluator.getName(), score);
-        return playerRepository.save(player);
-    }
-
-
     public void updatePresence(List<PlayerDTO> players) {
-        for (PlayerDTO player : players) {
-            Player entity = playerRepository.findById(player.getId())
-                    .orElseThrow(() -> new RuntimeException("Player not found"));
-            entity.setGoing(player.getGoing() != null ? player.getGoing() : entity.isGoing());
-            playerRepository.save(entity);
-        }
+        List<Player> entities = players.stream()
+                .map(player -> {
+                    Player entity = playerRepository.findById(player.getId())
+                            .orElseThrow(() -> new ResourceNotFoundException("Player not found"));
+                    entity.setGoing(player.getGoing() != null ? player.getGoing() : entity.isGoing());
+                    return entity;
+                })
+                .collect(Collectors.toList());
+        playerRepository.saveAll(entities);
     }
 
 
     // Filtra jogadores confirmados
-    public List<Player> getConfirmedPlayers() {
+    public List<PlayerDTO> getConfirmedPlayers() {
         return getAllPlayers().stream()
-            .filter(Player::isGoing)
-            .collect(Collectors.toList());
+                .filter(Player::isGoing)
+                .map(PlayerDTO::new)
+                .collect(Collectors.toList());
     }
 
     public void submitVotes(String username, List<VoteDTO> votes) {
         for(VoteDTO vote : votes) {
             if(vote.getVote() > 0){
                 Player player = getPlayerById(vote.getId());
-                player.evaluate(username, vote.getVote());
+                evaluate(player, username, vote.getVote());
                 playerRepository.save(player);
             }
+        }
+    }
+
+    public void evaluate(Player player, String appraiser, int rating) {
+        boolean votedRecently = player.getRatings().stream()
+                .filter(entry -> entry.getAppraiser().equals(appraiser))
+                .anyMatch(entry -> entry.getRatedAt() != null
+                        && entry.getRatedAt().isAfter(LocalDate.now().minusDays(6)));
+
+        if (!votedRecently) {
+            player.getRatingsInternal().add(new RatingEntry(appraiser, rating, LocalDate.now()));
+            calculateAverageSkill(player);
+        }
+    }
+
+    private void calculateAverageSkill(Player player) {
+        if (!player.getRatings().isEmpty()) {
+            double sum = player.getRatings().stream()
+                    .mapToInt(RatingEntry::getRating)
+                    .sum();
+            player.setRating(sum / player.getRatings().size());
         }
     }
 }

@@ -12,21 +12,25 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    private static final String[] PUBLIC_MATCHERS = {
+            "/login", "/", "/users/create", "/ranking", "/static/**", "/css/**", "/js/**", "/images/**"
+    };
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login","/","users/create", "/ranking", "/static/**", "/css/**", "/js/**", "/images/**").permitAll() // Permitir acesso ao login e assets
-                        .anyRequest().authenticated() // Todas as outras rotas exigem autenticação
+                        .requestMatchers(PUBLIC_MATCHERS).permitAll()
+                        .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .loginPage("/login") // Página personalizada de login
-                        .defaultSuccessUrl("/", true) // Redireciona para a página inicial após login bem-sucedido
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/", true)
                         .permitAll()
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login?logout") // Redireciona para o login após logout
+                        .logoutSuccessUrl("/login?logout")
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
                         .permitAll()

@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,44 +27,36 @@ public class Player {
     @Column(nullable = false)
     private double rating;
 
-    private boolean isGoing;
+    private boolean going;
 
     @ElementCollection
     @CollectionTable(name = "ratings", joinColumns = @JoinColumn(name = "player_id"))
     private List<RatingEntry> ratings = new ArrayList<>();
 
+    @OneToOne
+    @JoinColumn(name = "user_id", unique = true)
+    private UserCommon user;
+
     public Player(PlayerDTO playerDTO) {
         this.name = playerDTO.getName();
         this.rating = playerDTO.getRating();
-        this.isGoing = playerDTO.getGoing();
+        this.going = playerDTO.getGoing();
     }
 
-    public void evaluate(String player, int rating) {
-        boolean votedRecently = ratings.stream()
-                .filter(entry -> entry.getAppraiser().equals(player))
-                .anyMatch(entry -> entry.getRatedAt() != null
-                        && entry.getRatedAt().isAfter(LocalDate.now().minusDays(6)));
-
-        if (!votedRecently) {
-            this.ratings.add(new RatingEntry(player, rating, LocalDate.now()));
-            calculateAverageSkill();
-        }
-    }
-
-    /**
-     * Calcula a media das avaliacoes
-     */
-    private void calculateAverageSkill() {
-        if (!ratings.isEmpty()) {
-            double sum = ratings.stream()
-                    .mapToInt(RatingEntry::getRating)
-                    .sum();
-            this.rating = sum / ratings.size();
-        }
+    public List<RatingEntry> getRatingsInternal() {
+        return ratings;
     }
 
     @Override
-    public String toString() {
-        return name + " (Habilidade: " + String.format("%.2f", rating) + ")";
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return id != null && id.equals(player.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 }

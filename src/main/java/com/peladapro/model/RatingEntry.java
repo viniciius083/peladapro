@@ -1,22 +1,29 @@
-package com.peladapro.model;
+java
+        package com.peladapro.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Embeddable;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDate;
 
+/**
+ * Representa uma avaliação feita por um usuário a outro.
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Setter
 @Embeddable
 public class RatingEntry {
 
+    @NotNull
     private String appraiser;
-    private Integer rating;
-    private LocalDate ratedAt;
 
+    @NotNull
+    private Integer rating;
+
+    @NotNull
+    private LocalDate ratedAt;
 }

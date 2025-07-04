@@ -2,11 +2,15 @@ package com.peladapro.dto.player;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.peladapro.model.Player;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class PlayerDTO{
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
@@ -16,13 +20,6 @@ public class PlayerDTO{
     private double rating;
 
     private Boolean going;
-
-    public PlayerDTO() {
-        this.setId(null);
-        this.setName(null);
-        this.setRating(0);
-        this.setGoing(false);
-    }
 
     public PlayerDTO(Player player) {
         this.setId(player.getId());
