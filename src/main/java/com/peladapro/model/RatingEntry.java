@@ -1,5 +1,4 @@
-java
-        package com.peladapro.model;
+package com.peladapro.model;
 
 import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotNull;
