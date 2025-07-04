@@ -22,5 +22,15 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
 
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    ports:
+      - "9191:8080"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    restart: unless-stopped
+
 volumes:
   mysql_data:
+  jenkins_home:
