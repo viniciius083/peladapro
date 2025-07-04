@@ -13,7 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private static final String[] PUBLIC_MATCHERS = {
-            "/login", "/", "/users/create", "/ranking", "/static/**", "/css/**", "/js/**", "/images/**"
+            "/login", "/", "/ranking", "/static/**", "/css/**", "/js/**", "/images/**"
     };
 
     @Bean
