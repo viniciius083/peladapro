@@ -18,6 +18,6 @@ RUN curl -SL https://github.com/docker/compose/releases/latest/download/docker-c
     chmod +x /usr/local/bin/docker-compose
 
 # Garante que o grupo docker existe e adiciona o jenkins
-RUN groupadd -for docker && usermod -aG docker jenkins
+RUN groupadd -f docker && usermod -aG docker jenkins
 
 USER jenkins
