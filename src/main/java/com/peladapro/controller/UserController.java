@@ -19,6 +19,7 @@ public class UserController {
 
     /**
      * Mostra a tela de cadastro de usuários.
+     *
      * @param model Model
      * @return Tela de cadastro de usuários
      */
@@ -31,6 +32,7 @@ public class UserController {
 
     /**
      * Cria um novo usuário.
+     *
      * @param userDTO Dados do usuário
      * @param model Model
      * @return redireciona para a tela inicial
@@ -45,6 +47,7 @@ public class UserController {
 
     /**
      * Realiza o logout do usuário.
+     *
      * @return Redireciona para a tela de login
      */
     @GetMapping("/logout")
@@ -54,6 +57,7 @@ public class UserController {
 
     /**
      * Realiza o login do usuário.
+     *
      * @param error se o login falhar, exibe uma mensagem
      * @param logout se o logout ocorrer, exibe uma mensagem
      * @param model Model
