@@ -16,7 +16,7 @@ services:
     depends_on:
       - mysql
     ports:
-      - "9090:8080"
+      - "8080:8080"
     environment:
       SPRING_DATASOURCE_URL: "jdbc:mysql://mysql:3306/peladapro?useSSL=false&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true"
       SPRING_DATASOURCE_USERNAME: root
