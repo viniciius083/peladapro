@@ -24,10 +24,8 @@ services:
 
   jenkins:
     build:
-      context: .
-      dockerfile: Dockerfile.jenkins
+      context: ./jenkins
     container_name: jenkins
-    user: root  # importante para acessar /var/run/docker.sock
     ports:
       - "9191:8080"
     volumes:
