@@ -23,8 +23,11 @@ services:
       SPRING_DATASOURCE_PASSWORD: root
 
   jenkins:
-    image: jenkins/jenkins:lts
+    build:
+      context: .
+      dockerfile: Dockerfile.jenkins
     container_name: jenkins
+    user: root  # importante para acessar /var/run/docker.sock
     ports:
       - "9191:8080"
     volumes:
