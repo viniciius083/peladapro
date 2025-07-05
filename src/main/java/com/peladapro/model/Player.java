@@ -43,6 +43,13 @@ public class Player {
         this.going = playerDTO.getGoing();
     }
 
+    public Player(UserCommon user) {
+        this.setName(user.getUsername());
+        this.setRating(0.0);
+        this.setGoing(true);
+        this.setUser(user);
+    }
+
     public List<RatingEntry> getRatingsInternal() {
         return ratings;
     }

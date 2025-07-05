@@ -5,6 +5,7 @@ import com.peladapro.dto.vote.VoteDTO;
 import com.peladapro.exception.ResourceNotFoundException;
 import com.peladapro.model.Player;
 import com.peladapro.model.RatingEntry;
+import com.peladapro.model.UserCommon;
 import com.peladapro.repository.PlayerRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -98,5 +99,9 @@ public class PlayerService {
                     .sum();
             player.setRating(sum / player.getRatings().size());
         }
+    }
+
+    public void createPlayerByUser(UserCommon user) {
+        playerRepository.save(new Player(user));
     }
 }

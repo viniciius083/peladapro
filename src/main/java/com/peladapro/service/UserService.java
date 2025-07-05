@@ -17,6 +17,9 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
+    private PlayerService playerService;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
 
@@ -30,7 +33,9 @@ public class UserService {
                 .password(passwordEncoder.encode(userDTO.getPassword()))
                 .role(Role.USER)
                 .build();
-
         userRepository.save(user);
+
+        //criar um player com dados do user
+        playerService.createPlayerByUser(user);
     }
 }

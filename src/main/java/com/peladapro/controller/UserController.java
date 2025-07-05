@@ -24,7 +24,6 @@ public class UserController {
      * @return Tela de cadastro de usuários
      */
     @GetMapping("/users/create")
-    @PreAuthorize("hasRole('ADMIN')")
     public String showCreateUserForm(Model model) {
         model.addAttribute("user", new UserDTO());
         return "newUser";
@@ -38,7 +37,6 @@ public class UserController {
      * @return redireciona para a tela inicial
      */
     @PostMapping("/users/create")
-    @PreAuthorize("hasRole('ADMIN')")
     public String createUser(@ModelAttribute UserDTO userDTO, Model model) {
         userService.createUser(userDTO);
         model.addAttribute("message", "Usuário criado com sucesso!");
