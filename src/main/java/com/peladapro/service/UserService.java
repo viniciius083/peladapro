@@ -22,10 +22,10 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
     /**
      * Cria um novo usuário.
-     * @param userDTO  objeto contendo os dados do novo usuário
+     *
+     * @param userDTO Dados do usuário
      */
     public void createUser(UserDTO userDTO) {
         UserCommon user = UserCommon.builder()
