@@ -1,6 +1,7 @@
 package com.peladapro.service;
 
 import com.peladapro.dto.user.UserDTO;
+import com.peladapro.enumeration.Role;
 import com.peladapro.model.UserCommon;
 import com.peladapro.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class UserService {
         UserCommon user = UserCommon.builder()
                 .username(userDTO.getUsername())
                 .password(passwordEncoder.encode(userDTO.getPassword()))
-                .role(userDTO.getRole())
+                .role(Role.USER)
                 .build();
 
         userRepository.save(user);
