@@ -89,8 +89,8 @@ public class PlayerController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         List<VoteDTO> votes = votingList.getVotes();
-        playerService.submitVotes(username, votes);
-        return "redirect:/vote";
+        boolean success = playerService.submitVotes(username, votes);
+        return "redirect:/vote?success="+success;
     }
 
 }

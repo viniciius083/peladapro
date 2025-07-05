@@ -20,6 +20,8 @@ import java.util.stream.Collectors;
 public class PlayerService {
 
     private final PlayerRepository playerRepository;
+    private boolean canVote = false;
+
 
     public PlayerService(PlayerRepository playerRepository) {
         this.playerRepository = playerRepository;
@@ -70,13 +72,18 @@ public class PlayerService {
                 .collect(Collectors.toList());
     }
 
-    public void submitVotes(String username, List<VoteDTO> votes) {
-        for(VoteDTO vote : votes) {
-            if(vote.getVote() > 0){
-                Player player = getPlayerById(vote.getId());
-                evaluate(player, username, vote.getVote());
-                playerRepository.save(player);
+    public boolean submitVotes(String username, List<VoteDTO> votes) {
+        if (!canVote) {
+            return false;
+        }else{
+            for (VoteDTO vote : votes) {
+                if (vote.getVote() > 0) {
+                    Player player = getPlayerById(vote.getId());
+                    evaluate(player, username, vote.getVote());
+                    playerRepository.save(player);
+                }
             }
+            return true;
         }
     }
 
