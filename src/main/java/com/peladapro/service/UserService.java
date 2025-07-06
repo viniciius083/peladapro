@@ -36,6 +36,6 @@ public class UserService {
         userRepository.save(user);
 
         //criar um player com dados do user
-        playerService.createPlayerByUser(user);
+//        playerService.createPlayerByUser(user);
     }
 }
