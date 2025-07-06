@@ -111,4 +111,8 @@ public class PlayerService {
     public void createPlayerByUser(UserCommon user) {
         playerRepository.save(new Player(user));
     }
+
+    public void setCanVote(boolean canVote) {
+        this.canVote = canVote;
+    }
 }
