@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class PlayerService {
 
     private final PlayerRepository playerRepository;
-    private boolean canVote = false;
+    private boolean canVote = true;
 
 
     public PlayerService(PlayerRepository playerRepository) {

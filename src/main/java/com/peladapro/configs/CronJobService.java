@@ -23,7 +23,7 @@ public class CronJobService {
     }
 
     // Todo domingo às 07:20
-    @Scheduled(cron = "0 20 7 * * 0", zone = "America/Sao_Paulo") // 0 = domingo
+    @Scheduled(cron = "0 50 7 * * 0", zone = "America/Sao_Paulo") // 0 = domingo
     public void tarefaSeteVinte() {
         System.out.println(LocalDateTime.now() + "Executando domingo às 07:20");
         playerService.setCanVote(false);
