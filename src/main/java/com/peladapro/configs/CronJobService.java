@@ -4,6 +4,8 @@ import com.peladapro.service.PlayerService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 public class CronJobService {
 
@@ -14,16 +16,16 @@ public class CronJobService {
     }
 
     // Todo domingo às 05:00
-    @Scheduled(cron = "0 0 5 * * 0") // 0 = domingo
+    @Scheduled(cron = "0 0 5 * * 0", zone = "America/Sao_Paulo") // 0 = domingo
     public void tarefaCincoHoras() {
-        System.out.println("Executando domingo às 05:00");
+        System.out.println(LocalDateTime.now() + "Executando domingo às 05:00");
         playerService.setCanVote(true);
     }
 
     // Todo domingo às 07:20
-    @Scheduled(cron = "0 20 7 * * 0") // 0 = domingo
+    @Scheduled(cron = "0 20 7 * * 0", zone = "America/Sao_Paulo") // 0 = domingo
     public void tarefaSeteVinte() {
-        System.out.println("Executando domingo às 07:20");
+        System.out.println(LocalDateTime.now() + "Executando domingo às 07:20");
         playerService.setCanVote(false);
     }
 }
