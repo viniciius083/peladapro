@@ -4,3 +4,7 @@ services:
     container_name: peladapro
     ports:
       - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://${SUPABASE_HOST}:${SUPABASE_PORT}/${SUPABASE_DB}
+      SPRING_DATASOURCE_USERNAME: ${SUPABASE_USER}
+      SPRING_DATASOURCE_PASSWORD: ${SUPABASE_PASSWORD}

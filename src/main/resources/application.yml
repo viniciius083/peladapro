@@ -7,10 +7,9 @@ spring:
     application:
         name: peladapro
     datasource:
-        url: jdbc:postgresql://aws-0-us-east-2.pooler.supabase.com:6543/postgres
-        username: ${DB_USERNAME}
-        password: ${DB_PASSWORD}
-        driver-class-name: org.postgresql.Driver
+        url: ${SPRING_DATASOURCE_URL}
+        username: ${SPRING_DATASOURCE_USERNAME}
+        password: ${SPRING_DATASOURCE_PASSWORD}
 
     jpa:
         hibernate:
