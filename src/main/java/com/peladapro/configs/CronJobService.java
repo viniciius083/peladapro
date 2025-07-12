@@ -16,9 +16,9 @@ public class CronJobService {
     }
 
     // Todo domingo às 05:00
-    @Scheduled(cron = "0 0 5 * * 0", zone = "America/Sao_Paulo") // 0 = domingo
+    @Scheduled(cron = "0 0 20 * * 6", zone = "America/Sao_Paulo")
     public void tarefaCincoHoras() {
-        System.out.println(LocalDateTime.now() + "Executando domingo às 05:00");
+        System.out.println(LocalDateTime.now() + "Executando sabado às 20:00");
         playerService.setCanVote(true);
     }
 
