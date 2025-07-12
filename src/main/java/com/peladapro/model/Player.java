@@ -30,7 +30,7 @@ public class Player {
     private boolean going;
 
     @ElementCollection
-    @CollectionTable(name = "ratings", joinColumns = @JoinColumn(name = "player_id"))
+    @CollectionTable(name = "tb_ratings", joinColumns = @JoinColumn(name = "player_id"))
     private List<RatingEntry> ratings = new ArrayList<>();
 
     @OneToOne
