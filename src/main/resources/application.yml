@@ -6,7 +6,6 @@ spring:
             static-locations: classpath:/static/
     application:
         name: peladapro
-
     datasource:
         url: jdbc:postgresql://db.jknrahnytchsbwhxyqeo.supabase.co:5432/postgres
         username: ${DB_USERNAME}
