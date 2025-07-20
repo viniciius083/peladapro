@@ -6,27 +6,26 @@ spring:
             static-locations: classpath:/static/
     application:
         name: peladapro
+
     datasource:
         url: ${SPRING_DATASOURCE_URL}
         username: ${SPRING_DATASOURCE_USERNAME}
         password: ${SPRING_DATASOURCE_PASSWORD}
         driver-class-name: org.postgresql.Driver
         hikari:
-            maximum-pool-size: 5       # Reduzido para caber no limite do Supabase
+            maximum-pool-size: 3
             minimum-idle: 1
-            idle-timeout: 30000        # 30 segundos
-            max-lifetime: 60000        # 60 segundos
-            connection-timeout: 20000  # 20 segundos (timeout de tentativa de conexão)
+            idle-timeout: 10000
+            max-lifetime: 30000
+            connection-timeout: 20000
+
     jpa:
         hibernate:
             ddl-auto: update
         show-sql: true
         properties:
             hibernate:
-                dialect: org.hibernate.dialect.PostgreSQLDialect
-
-
-
+                format_sql: true
 
 server:
     port: 8080
