@@ -12,14 +12,11 @@ spring:
         password: ${SPRING_DATASOURCE_PASSWORD}
         driver-class-name: org.postgresql.Driver
         hikari:
-            maximum-pool-size: 10
-            minimum-idle: 2
-            idle-timeout: 30000           # 30 segundos
-            max-lifetime: 300000          # 5 minutos — reinicia conexões antes do PostgreSQL matar
-            keepalive-time: 150000        # 2.5 minutos — força atividade para manter conexão viva
-            connection-timeout: 20000     # 20 segundos para tentar pegar conexão
-            validation-timeout: 5000      # tempo limite para validar a conexão
-            initialization-fail-timeout: 0
+            maximum-pool-size: 5       # Reduzido para caber no limite do Supabase
+            minimum-idle: 1
+            idle-timeout: 30000        # 30 segundos
+            max-lifetime: 60000        # 60 segundos
+            connection-timeout: 20000  # 20 segundos (timeout de tentativa de conexão)
     jpa:
         hibernate:
             ddl-auto: update
